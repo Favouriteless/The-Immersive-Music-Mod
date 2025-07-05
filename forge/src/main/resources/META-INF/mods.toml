@@ -1,0 +1,26 @@
+modLoader = "javafml"
+loaderVersion = "${forge_loader_version_range}"
+license = "GNU GPL-3"
+
+[[mods]]
+modId = "timm"
+version = "${version}"
+displayName = "The Immersive Music Mod"
+logoFile = "icon.png"
+credits = "Thanks for this example mod goes to Java"
+authors = "Nate (Music Author), Pardys (Dev), Favouriteless (Dev)"
+description = '''A complete overhaul to Minecraft music'''
+
+[[dependencies.timm]]
+    modId = "forge"
+    mandatory = true
+    versionRange = "[${forge_version},)"
+    ordering = "NONE"
+    side = "BOTH"
+
+[[dependencies.timm]]
+    modId = "minecraft"
+    mandatory = true
+    versionRange = "[1.20,1.22)"
+    ordering = "NONE"
+    side = "BOTH"

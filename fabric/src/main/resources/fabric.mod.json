@@ -1,0 +1,48 @@
+{
+    "schemaVersion": 1,
+    "id": "timm",
+    "version": "${version}",
+    "name": "The Immersive Music Mod",
+    "description": "A complete overhaul to Minecraft music",
+    "authors": [
+        "Nate (Music Author), Pardys (Dev), Favouriteless (Dev)"
+    ],
+    "contact": {
+        "issues": "https://github.com/sf-inc/timm/issues",
+        "sources": "https://github.com/sf-inc/timm"
+    },
+    "license": "GNU GPL-3",
+    "icon": "assets/timm/icon.png",
+    "environment": "*",
+    "entrypoints": {
+        "main": [
+            "com.github.charlyb01.common.TimmFabric"
+        ],
+        "client": [
+            "com.github.charlyb01.client.TimmClientFabric"
+        ]
+    },
+    "mixins": [
+        "timm.mixins.json",
+        "timm.fabric.mixins.json"
+    ],
+    "depends": {
+        "fabricloader": ">=0.14",
+        "fabric": "*",
+        "minecraft": ">=1.20 <1.21",
+        "java": ">=17",
+        "forgeconfigapiport": ">=8.0.2"
+    },
+    "custom": {
+        "modmenu": {
+            "links": {
+                "modmenu.buymeacoffee": "https://www.buymeacoffee.com/immersivemusicmod?status=1",
+                "modmenu.discord": "https://discord.com/invite/zPZP9RT253",
+                "modmenu.modrinth": "https://modrinth.com/mod/immersivemusicmod",
+                "modmenu.patreon": "https://www.patreon.com/ImmersiveMusicMod",
+                "modmenu.youtube": "https://www.youtube.com/@goldeagleproductions"
+            }
+        }
+    }
+}
+  

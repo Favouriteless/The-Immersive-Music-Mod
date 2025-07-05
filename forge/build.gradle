@@ -1,0 +1,68 @@
+plugins {
+    id 'multiloader-loader'
+    id 'net.neoforged.moddev.legacyforge'
+}
+
+mixin {
+    add(sourceSets.main, "timm.refmap.json")
+
+    config("timm.mixins.json")
+    config("timm.forge.mixins.json")
+}
+
+legacyForge {
+    version = "${minecraft_version}-${forge_version}"
+
+    validateAccessTransformers = true
+
+    def at = project(':common').file('src/main/resources/META-INF/accesstransformer.cfg')
+    if (at.exists()) {
+        accessTransformers = ["src/main/resources/META-INF/accesstransformer.cfg"]
+    }
+    parchment {
+        minecraftVersion = parchment_minecraft
+        mappingsVersion = parchment_version
+    }
+    runs {
+        client {
+            client()
+        }
+        data {
+            data()
+            programArguments.addAll '--mod', 'timm', '--all', '--output', file('src/generated/resources/').getAbsolutePath(), '--existing', file('src/main/resources/').getAbsolutePath()
+        }
+        server {
+            server()
+        }
+    }
+
+    mods {
+        "timm" {
+            sourceSet sourceSets.main
+        }
+    }
+}
+
+sourceSets.main.resources.srcDir 'src/generated/resources'
+
+dependencies {
+    implementation project(":common")
+    annotationProcessor("org.spongepowered:mixin:0.8.5:processor")
+
+    implementation group: 'org.jetbrains', name: 'annotations', version: '26.0.2'
+    implementation group: 'com.google.code.findbugs', name: 'jsr305', version: '3.0.1'
+
+    compileOnly(annotationProcessor("io.github.llamalad7:mixinextras-common:${mixinextras_version}"))
+    jarJar(implementation("io.github.llamalad7:mixinextras-forge:${mixinextras_version}")) {
+        version {
+            strictly "[${mixinextras_version},)"
+        }
+    }
+}
+
+jar {
+    finalizedBy('reobfJar')
+    manifest.attributes([
+            "MixinConfigs": "timm.mixins.json,timm.forge.mixins.json"
+    ])
+}
